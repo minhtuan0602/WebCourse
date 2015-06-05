@@ -1,19 +1,42 @@
 <?php
+use App\Aricle;
+use App\Category;
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
-Route::get('/', 'WelcomeController@index');
+Route::get('/', 'HomeController@index');
 
 Route::get('home', 'HomeController@index');
+
+Route::group(
+  ['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMiddleware', ],
+  function() {
+    Route::get('/', 'Admin\AdminController@index');
+
+    Route::get('/edit-page', 'Admin\CategoryController@editPage');
+    Route::get('/edit-news', 'Admin\CategoryController@editNews');
+    Route::get('/edit-training', 'Admin\CategoryController@editTraining');
+    Route::get('/edit-research', 'Admin\CategoryController@editResearch');
+    Route::get('/edit-history', 'Admin\CategoryController@editHistory');
+    
+
+    Route::resource('categories', 'Admin\CategoryController');
+    Route::resource('categories.articles', 'Admin\ArticleController');
+
+    Route::resource('users', 'Admin\UserController');
+    Route::resource('profiles', 'Admin\ProfileController');
+  }
+);
+
+// Provide controller methods with object instead of ID
+Route::model('categories', 'Category');
+Route::model('articles', 'Article');
+
+// Use slugs rather than IDs in URLs
+Route::bind('articles', function($value, $route) {
+  return App\Article::whereSlug($value)->first();
+});
+Route::bind('categories', function($value, $route) {
+  return App\Category::whereSlug($value)->first();
+});
 
 Route::group(['prefix' => 'profile/{id}', 'middleware' => 'App\Http\Middleware\EditMiddleWare'], function()
 {

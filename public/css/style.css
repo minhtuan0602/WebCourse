@@ -1,0 +1,46 @@
+/* image for user */
+.img-circle {
+  width: 140px;
+  height: 140px;
+  margin: 5px;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 0;
+}
+
+label {
+  float:left;
+  width:25%;
+  margin-right:0.5em;
+  padding-top:0.2em;
+  font-weight:bold;
+}
+
+.input-title {
+  font-size: 15px;
+}
+
+.name-product {
+  text-align: center;
+  font-weight: bold;
+  color: #FFA17F;
+}
+
+.center {
+  text-align: center;
+}
+
+/* Set hover and active link */
+a:hover, a:active, a:focus, a:visited {
+  text-decoration: none;
+}
+
+/* Set button to 100% */
+.btn-width-100 {
+	width: 100%;
+}
+
+
+.right {
+  text-align: right;
+}
