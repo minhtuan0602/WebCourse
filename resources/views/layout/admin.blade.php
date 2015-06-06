@@ -28,6 +28,12 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link href="/admin_template/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
 
+    <!-- WYSIWYW -->
+    <script src="/js/nicEdit.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+    </script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -73,7 +79,7 @@
             </ul>
           </div>
 
-          
+
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <li>
@@ -94,9 +100,10 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
+            <li><a href="/admin/edit-page"><i class="fa fa-edit"></i> <span>Chỉnh sửa trang</span></a></li>
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-dashboard"></i> <span>Quảng lý trang chính</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-dashboard"></i> <span>Quản lý trang chính</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
                 <li><a href="/admin/edit-training"><i class="fa fa-circle-o"></i> Chỉnh sửa trang đào tạo </a></li>
@@ -123,6 +130,8 @@
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
+        @include('layout/partials/_errors')      
+
         @yield('content')
       </div><!-- /.content-wrapper -->
 
@@ -174,5 +183,16 @@
     
     <!-- AdminLTE for demo purposes -->
     <script src="/admin_template/dist/js/demo.js" type="text/javascript"></script>
+
+    
+    <!-- WYSIWYW -->
+    <script src="/js/nicEdit.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      bkLib.onDomLoaded(function() {
+      nicEditors.editors.push(
+      new nicEditor({fullPanel : true}).panelInstance(
+      document.getElementById('myNicEditor')
+      ));
+    </script>
   </body>
 </html>

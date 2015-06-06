@@ -11,6 +11,6 @@
   <b>Tác giả: </b>{{ $article->username }}<br />
   <b>Ngày đăng: </b>{{ $article->dateWrite }}<br />
   <b>Nội dung: </b><br />
-  <p>{{ $article->content }}</p>
+  <p>{!! html_entity_decode($article->content) !!}</p>
 </div>
 @endsection

@@ -1,46 +1,26 @@
-<div class="form-group row">
-  <div class="col-xs-6">
-    {!! Form::label('username', 'Username: ') !!}
-  </div>
-  <div class="col-xs-6">
-    {!! Form::text('username') !!}
-  </div>
+<div class="form-group">
+  {!! Form::label('username', 'Username: ') !!}
+  {!! Form::text('username', null, ['class' => 'form-control']) !!}
 </div>
 
-<div class="form-group row">
-  <div class="col-xs-6">
-    {!! Form::label('password', 'Mật khẩu: ') !!}
-  </div>
-  <div class="col-xs-6">
-    {!! Form::password('password') !!}
-  </div>
+<div class="form-group">
+  {!! Form::label('password', 'Mật khẩu: ') !!}
+  {!! Form::password('password', ['class' => 'form-control']) !!}
 </div>
 
-<div class="form-group row">
-  <div class="col-xs-6">
-    {!! Form::label('password_confirmation', 'Xác nhận mật khẩu: ') !!}
-  </div>
-  <div class="col-xs-6">
-    {!! Form::password('password_confirmation') !!}
-  </div>
+<div class="form-group">
+  {!! Form::label('password_confirmation', 'Xác nhận mật khẩu: ') !!}
+  {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
 </div>
 
-<div class="form-group row">
-  <div class="col-xs-6">
-    {!! Form::label('email', 'Email: ') !!}
-  </div>
-  <div class="col-xs-6">
-    {!! Form::text('email') !!}
-  </div>
+<div class="form-group">
+  {!! Form::label('email', 'Email: ') !!}
+  {!! Form::email('email', null, ['class' => 'form-control']) !!}
 </div>
 
-<div class="form-group row">
-  <div class="col-xs-6">
-    {!! Form::label('type', 'Trạng thái:', array('class' => 'input-label')) !!}
-  </div>
-  <div class="col-xs-6">
-    {!! Form::select('type', array('A' => 'Admin', 'G' => 'Teacher')) !!}
-  </div>
+<div class="form-group">
+  {!! Form::label('type', 'Cấp quyền:', array('class' => 'input-label')) !!}
+  {!! Form::select('type', array('A' => 'Admin', 'G' => 'Teacher')) !!}
 </div>
 
 <div class="form-group">
