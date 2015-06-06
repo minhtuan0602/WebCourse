@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder {
 		Model::unguard();
 
 		$this->call('UsersTableSeeder');
+    $this->call('CategoriesTableSeeder');
 	}
 
 }
@@ -35,3 +36,20 @@ class UsersTableSeeder extends Seeder {
 
 }
 
+class CategoriesTableSeeder extends Seeder {
+
+  public function run()
+  {
+    DB::table('categories')->delete();
+
+    $categories = array(
+        ['id' => 1, 'name' => 'Đào tạo', 'slug' => 'dao-tao', 'isBuiltIn' => true, 'created_at' => new DateTime, 'updated_at' => new DateTime],
+        ['id' => 2, 'name' => 'Tin tức', 'slug' => 'tin-tuc', 'isBuiltIn' => true, 'created_at' => new DateTime, 'updated_at' => new DateTime],
+        ['id' => 3, 'name' => 'Nghiên cứu', 'slug' => 'nghien-cuu', 'isBuiltIn' => true, 'created_at' => new DateTime, 'updated_at' => new DateTime],
+        ['id' => 4, 'name' => 'Lịch Sử', 'slug' => 'lich-su', 'isBuiltIn' => true, 'created_at' => new DateTime, 'updated_at' => new DateTime],
+    );
+
+    DB::table('categories')->insert($categories);
+  }
+
+}

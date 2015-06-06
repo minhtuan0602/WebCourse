@@ -1,7 +1,8 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\Admin;
 
 use Input;
 use Redirect;
+use App\User;
 use App\Profile;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -15,41 +16,33 @@ class ProfileController extends Controller {
     'position' => ['required', 'min:5'],
   ];
 
-  public function getID(Request $request)
-  {
-    $user = $request->user();
-    $user_id = $user['attributes']['id'];
-    $email = $user['attributes']['email'];
-    return array($user_id, $email);
-  }
-
-	public function show(Request $request)
-  {
-    $user = $this->getID($request);
-    $profile = Profile::where('user_id', '=', $user[0])->first();
+	public function show($id)
+	{
+		$user = User::find($id);
+    $profile = Profile::where('user_id', '=', $user->id)->first();
     if (is_null($profile)) {
       $profile = new Profile;
-      $profile->user_id = $user[0];
-      $profile->email = $user[1];
+      $profile->user_id = $user->id;
+      $profile->email = $user->email;
       $profile->save();
     }
-    return view('profiles.show', compact('profile'));
-  }
+    return view('admin.profiles.show', compact('profile'));
+	}
 
-  public function edit(Request $request)
-  {
-    $user = $this->getID($request);
-    $profile = Profile::where('user_id', '=', $user[0])->first();
-    return view('profiles.edit', compact('profile'));
-  }
+	public function edit($id)
+	{
+		$user = User::find($id);
+    $profile = Profile::where('user_id', '=', $user->id)->first();
+    return view('admin.profiles.edit', compact('user', 'profile'));
+	}
 
-  public function update(Request $request)
-  {
-    $this->validate($request, $this->rules);
+	public function update(Request $request, $id)
+	{
+		$this->validate($request, $this->rules);
+    $user = User::find($id);
     $input = array_except(Input::all(), ['_token', 'avatar', 'birthday']);
 
-    $user = $this->getID($request);
-    $profile = Profile::where('user_id', '=', $user[0])->first();
+    $profile = Profile::where('user_id', '=', $user->id)->first();
     $profile->update($input);
 
     // Update Avatar
@@ -72,7 +65,7 @@ class ProfileController extends Controller {
 
     $profile->save();
 
-    return Redirect::to('profile/'.$user[0])->with('message', 'Chỉnh sửa thông tin người dùng');
-  }
+    return Redirect::to('/admin/profiles/'.$user->id)->with('message', 'Chỉnh sửa thông tin người dùng');
+	}
 
 }
