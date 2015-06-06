@@ -12,7 +12,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	protected $table = 'users';
 
-	protected $fillable = ['email', 'password', 'username'];
+	protected $fillable = ['email', 'password', 'username', 'type'];
 
 	protected $hidden = ['password', 'remember_token'];
 

@@ -1,4 +1,4 @@
-@extends('layout/layout')
+@extends('layout/admin')
 
 @section('title')
     Chỉnh sửa trang
@@ -7,17 +7,18 @@
 @section('content')
 <div class="container">
   <h2>Chỉnh sửa trang</h2>
-    @if ( !$categories->count() )
-      <h4>Hiện nay không có category nào có thể. Chúng tôi sẽ nhanh chóng cập nhật sản phẩm mới nhất.</h4>
-    @else
-      <div> 
-        @foreach( $categories as $category )
-          <a href="{!! route('admin.categories.show', $category->slug) !!}">
-            <h4>{!! $category->name !!}</h4>
-          </a>
-          <a href="/admin/categories/{!! $category->slug !!}/edit"> Sửa </a>
-        @endforeach
-      </div>  
-    @endif
+    <div>
+      <a href="/admin/edit-training"><h4>Đào tạo</h4></a>
+      <a href="/admin/categories/dao-tao/edit"> Sửa </a>
+
+      <a href="/admin/edit-news"><h4>Tin tức</h4></a>
+      <a href="/admin/categories/tin-tuc/edit"> Sửa </a>
+
+      <a href="/admin/edit-research"><h4>Nghiên cứu</h4></a>
+      <a href="/admin/categories/nghien-cuu/edit"> Sửa </a>
+
+      <a href="/admin/edit-history"><h4>Lịch sử</h4></a>
+      <a href="/admin/categories/lich-su/edit"> Sửa </a>
+    </div>  
 </div>
 @endsection

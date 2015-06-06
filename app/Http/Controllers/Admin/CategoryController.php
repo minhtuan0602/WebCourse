@@ -41,7 +41,6 @@ class CategoryController extends Controller {
 
 	public function edit(Category $category)
 	{
-		// $category = Category::find($id);
 	  return view('admin.categories.edit', compact('category'));
 	}
 
@@ -52,7 +51,11 @@ class CategoryController extends Controller {
 		$input = Input::all();
 		$category->update($input);
 
-		return Redirect::route('admin.categories.show', $category->id)->with('message', 'Cập nhật Category thành công');
+		if ($category->isBuiltIn) {
+			return view('admin.categories.editPage');
+		}
+
+		return Redirect::route('admin.categories.show', $category->slug)->with('message', 'Cập nhật category '.$category->name.' thành công');
 	}
 
 	public function destroy(Category $category)
@@ -63,8 +66,7 @@ class CategoryController extends Controller {
 	}
 
 	public function editPage() {
-		$categories = Category::where('isBuiltIn', '=', true)->get();
-		return view('admin.categories.editPage', compact('categories'));
+		return view('admin.categories.editPage');
 	}
 
 	public function editNews()

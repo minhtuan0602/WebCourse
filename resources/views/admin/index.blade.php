@@ -1,4 +1,4 @@
-@extends('layout/layout')
+@extends('layout/admin')
 
 @section('title')
     Trang Admin
@@ -6,6 +6,6 @@
 
 @section('content')
 <div class="container">
-  This is admin site
+  <h2>Trang Admin</h2>
 </div>
 @endsection

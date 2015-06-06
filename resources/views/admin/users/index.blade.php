@@ -1,4 +1,4 @@
-@extends('layout/layout')
+@extends('layout/admin')
 
 @section('title')
   Danh sách người dùng
@@ -18,6 +18,7 @@
             <th>ID</th>
             <th>username</th>
             <th>email</th>
+            <th>Loại TK</th>
             <th>Profile</th>
             <th>Sửa</th>
             <th>Xóa</th>
@@ -29,6 +30,13 @@
               <td>{{ $user->id }}</td>
               <td>{{ $user->username }}</td>
               <td>{{ $user->email }}</td>
+              <td>
+                @if ($user->type == 'A')
+                  Admin
+                @else
+                  Giáo viên
+                @endif
+              </td>
               <td>
                 <a href="/admin/profiles/{!! $user->id !!}"> Profile</a>
               </td>
