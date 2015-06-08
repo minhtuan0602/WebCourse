@@ -35,7 +35,12 @@ class AuthController extends Controller {
 
     if ($this->auth->attempt($credentials, $request->has('remember')))
     {
-      return redirect()->intended($this->redirectPath());
+      $checkType = $request->user()->type;
+      if ($checkType == 'A') {
+        return redirect()->intended('/admin');
+      } else {
+        return redirect()->intended('/teacher');
+      }
     }
 
     return redirect($this->loginPath())

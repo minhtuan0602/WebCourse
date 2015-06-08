@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Trang Admin | Khoa Học Và Kỹ Thuật Máy Tính</title>
+    <title>Trang Teacher | Khoa Học Và Kỹ Thuật Máy Tính</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
     <link href="/admin_template/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />    
@@ -28,6 +28,8 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link href="/admin_template/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
 
+    <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -42,7 +44,7 @@
         <!-- Logo -->
         <a href="index2.html" class="logo">
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg">Trang Admin</span>
+          <span class="logo-lg">Trang Teacher</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -98,27 +100,17 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li><a href="/admin/edit-page"><i class="fa fa-edit"></i> <span>Chỉnh sửa trang</span></a></li>
+            <li><a href="/profile/{{ Auth::user()->id }}"><i class="fa fa-files-o"></i> <span>Thông tin người dùng</span></a></li>
+            <li><a href="/profile/{{ Auth::user()->id }}/edit"><i class="fa fa-edit"></i> <span>Chỉnh sửa thông tin</span></a></li>
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-dashboard"></i> <span>Quản lý trang chính</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-dashboard"></i> <span>Quản lý bài viết</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
                 <li><a href="/admin/edit-training"><i class="fa fa-circle-o"></i> Chỉnh sửa trang đào tạo </a></li>
                 <li><a href="/admin/edit-news"><i class="fa fa-circle-o"></i> Chỉnh sửa trang tin tức </a></li>
                 <li><a href="/admin/edit-research"><i class="fa fa-circle-o"></i> Chỉnh sửa trang nghiên cứu </a></li>
                 <li><a href="/admin/edit-history"><i class="fa fa-circle-o"></i> Chỉnh sửa trang lịch sử </a></li>
-              </ul>
-            </li>
-
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-laptop"></i> <span>Quản lý người dùng</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="/admin/users"><i class="fa fa-circle-o"></i> Danh sách người dùng</a></li>
-                <li><a href="/admin/users/create"><i class="fa fa-circle-o"></i> Thêm người dùng</a></li>
               </ul>
             </li>
           </ul>

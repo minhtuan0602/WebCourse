@@ -26,6 +26,14 @@ Route::group(
   }
 );
 
+Route::group(
+  ['prefix' => 'teacher', 'middleware' => 'App\Http\Middleware\TeacherMiddleware', ],
+  function() {
+    Route::get('/', 'TeacherController@index');
+    Route::get('/list-article', 'TeacherController@listArticle');
+  }
+);
+
 // Provide controller methods with object instead of ID
 Route::model('categories', 'Category');
 Route::model('articles', 'Article');

@@ -2,11 +2,11 @@
 
 use Closure;
 
-class AdminMiddleware {
+class TeacherMiddleware {
 
 	public function handle($request, Closure $next)
 	{
-		if (is_null($request->user()) || $request->user()->type != 'A')
+		if (is_null($request->user()))
     {
       return redirect('/auth/login');
     }

@@ -10,7 +10,7 @@ class EditMiddleWare {
 
 		if (is_null($request->user()) || $request->user()->id != $id['id'])
     {
-      return redirect('/');
+      return redirect('/auth/login');
     }
 
 		return $next($request);

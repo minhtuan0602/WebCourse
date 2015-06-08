@@ -1,11 +1,11 @@
-@extends('layout/admin')
+@extends('layout/teacher')
 
 @section('title')
-    Trang Admin 
+    Trang Teacher 
 @stop
 
 @section('content')
 <div class="container">
-  <h2>Trang Admin</h2>
+  <h2>Trang Giáo Viên</h2>
 </div>
 @endsection
