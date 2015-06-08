@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <title>Trang Admin | Khoa Học Và Kỹ Thuật Máy Tính</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+	<link rel="icon" type="image/png" href="/image/client/favicon.ico">
     <!-- Bootstrap 3.3.4 -->
     <link href="/admin_template/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />    
     <!-- FontAwesome 4.3.0 -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Ionicons 2.0.0 -->
-    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />    
+    <link href="/admin_template/css/ionicons.min.css" rel="stylesheet" type="text/css" />    
     <!-- Theme style -->
     <link href="/admin_template/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. Choose a skin from the css/skins 
@@ -31,8 +32,8 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <script src="/admin_template/css/html5shiv.min.js"></script>
+        <script src="/admin_template/css/respond.min.js"></script>
     <![endif]-->
   </head>
   <body class="skin-blue sidebar-mini">
@@ -40,7 +41,7 @@
       
       <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="/admin" class="logo">
           <!-- logo for regular state and mobile devices -->
           <span class="logo-lg">Trang Admin</span>
         </a>
@@ -61,14 +62,17 @@
 
                 <ul class="dropdown-menu">
                   <li class="user-footer">
-                    <div class="pull-left">
+                    <div>
                       @if (Auth::user()->type == 'A')
                         <a href="/admin">Trang Admin</a>
                       @elseif (Auth::user()->type == 'G')
                         <a href="/teacher">Trang Teacher</a>
                       @endif
                     </div>
-                    <div class="pull-right">
+                    <div>
+                      <a href="/profile/{{ Auth::user()->id }}">Thông tin người dùng</a>
+                    </div>
+                    <div>
                       <a href="/auth/logout">Đăng xuất</a>
                     </div>
                   </li>
@@ -145,7 +149,7 @@
     <!-- jQuery 2.1.4 -->
     <script src="/admin_template/plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- jQuery UI 1.11.2 -->
-    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="/admin_template/css/jquery-ui.min.js" type="text/javascript"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
       $.widget.bridge('uibutton', $.ui.button);
@@ -153,7 +157,7 @@
     <!-- Bootstrap 3.3.2 JS -->
     <script src="/admin_template/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>    
     <!-- Morris.js charts -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="/admin_template/css/raphael-min.js"></script>
     <script src="/admin_template/plugins/morris/morris.min.js" type="text/javascript"></script>
     <!-- Sparkline -->
     <script src="/admin_template/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
@@ -163,7 +167,7 @@
     <!-- jQuery Knob Chart -->
     <script src="/admin_template/plugins/knob/jquery.knob.js" type="text/javascript"></script>
     <!-- daterangepicker -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js" type="text/javascript"></script>
+    <script src="/admin_template/css/moment.min.js" type="text/javascript"></script>
     <script src="/admin_template/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
     <!-- datepicker -->
     <script src="/admin_template/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>

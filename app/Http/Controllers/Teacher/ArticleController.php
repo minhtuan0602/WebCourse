@@ -1,6 +1,7 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace App\Http\Controllers\Teacher;
 
 use Input;
+use App\User;
 use Redirect;
 use App\Article;
 use App\Category;
@@ -10,7 +11,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller {
-
 	// Transform array to convert english
 	protected $trans = array(
 		'à' => "a", 'á' => "a", 'ạ' => "a", 'ả' => "a", 'ã' => "a", 'â' => "a", 'ầ' => "a", 'ấ' => "a", 'ậ' => "a", 'ẩ' => "a", 'ẫ' => "a", 'ă' => "a", 'ắ' => "a", 'ặ' => "a", 'ẳ' => "a", 'ẵ' => "a",
@@ -34,17 +34,31 @@ class ArticleController extends Controller {
 		'content' => ['required', 'min:10'],
 	];
 
-	public function index(Category $category)
-	{
-		return view('admin.articles.index', compact('category'));
+	protected function getCategory(){
+		$categories = Category::where('isBuiltIn', '=', 0)->get();
+		$array_categories = [];
+		foreach ($categories as $category) {
+			array_push($array_categories, [$category->id => $category->name ]);
+		}
+		return $array_categories;
 	}
 
-	public function create(Category $category)
+	public function index(Request $request)
 	{
-		return view('admin.articles.create', compact('category'));
+		$user_id = $request->user()->id;
+
+    $user = User::find($user_id);
+    $articles = $user->articles;
+    return view('teacher.articles.index', compact('articles'));
 	}
 
-	public function store(Request $request, Category $category)
+	public function create()
+	{
+		$array_categories = $this->getCategory();
+		return view('teacher.articles.create', compact('array_categories'));
+	}
+
+	public function store(Request $request)
 	{
 		$this->validate($request, $this->rules);
 
@@ -54,8 +68,7 @@ class ArticleController extends Controller {
 		$slug = strtolower(strtr($title, $this->trans));
 
 		$input['slug'] = $slug;
-		$input['category_id'] = $category->id;
-		$input['user_id'] = $request->user()['attributes']['id'];
+		$input['user_id'] = $request->user()->id;
 		$input['dateWrite'] = date('Y-m-d H:i:s');
 
 		$image = Input::file('image');
@@ -66,22 +79,31 @@ class ArticleController extends Controller {
 			$input['image'] = '/image/article/image/'.$filename;
 		}
 
-		Article::create( $input );
+		$article = Article::create( $input );
 	 
-		return Redirect::route('admin.articles.show', $category->slug)->with('message', 'Tạo Article thành công');
+		return Redirect::route('teacher.articles.show', $article->slug)->with('message', 'Tạo Article thành công');
 	}
 
-	public function show(Category $category, Article $article)
+	public function show(Request $request, Article $article)
 	{
-		return view('admin.articles.show', compact('category', 'article'));
+		if ($request->user()->id != $article->user_id) {
+			return view('teacher.articles.error');
+		}
+
+		return view('teacher.articles.show', compact('article'));
 	}
 
-	public function edit(Category $category, Article $article)
+	public function edit(Request $request, Article $article)
 	{
-		return view('admin.articles.edit', compact('category', 'article'));
+		if ($request->user()->id != $article->user_id) {
+			return view('teacher.articles.error');
+		}
+
+		$array_categories = $this->getCategory();
+		return view('teacher.articles.edit', compact('article', 'array_categories'));
 	}
 
-	public function update(Request $request, Category $category, Article $article)
+	public function update(Request $request, Article $article)
 	{
 		$this->validate($request, $this->rules);
 
@@ -96,14 +118,22 @@ class ArticleController extends Controller {
 		}
 
 		$article->update($input);
-		return Redirect::route('admin.articles.show', compact('category', 'article'))->with('message', 'Sửa Article thành công');;
+		return Redirect::route('teacher.articles.show', $article->slug)->with('message', 'Sửa Article thành công');;
 	}
 
-	public function destroy(Category $category, Article $article)
+	public function destroy(Request $request, Article $article)
 	{
+		if ($request->user()->id != $article->user_id) {
+			return view('teacher.articles.error');
+		}
+
 		$article->delete();
- 
-		return Redirect::route('admin.categories.show', $category->slug)->with('message', 'Xóa Article thành công');
+
+		$user_id = $request->user()->id;
+
+    $user = User::find($user_id);
+    $articles = $user->articles;
+		return Redirect::route('teacher.articles.index', compact('articles'))->with('message', 'Xóa Article thành công');
 	}
 
 }

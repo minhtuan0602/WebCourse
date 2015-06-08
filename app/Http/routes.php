@@ -29,8 +29,9 @@ Route::group(
 Route::group(
   ['prefix' => 'teacher', 'middleware' => 'App\Http\Middleware\TeacherMiddleware', ],
   function() {
-    Route::get('/', 'TeacherController@index');
-    Route::get('/list-article', 'TeacherController@listArticle');
+    Route::get('/', 'Teacher\TeacherController@index');
+
+    Route::resource('articles', 'Teacher\ArticleController');
   }
 );
 
@@ -48,9 +49,9 @@ Route::bind('categories', function($value, $route) {
 
 Route::group(['prefix' => 'profile/{id}', 'middleware' => 'App\Http\Middleware\EditMiddleWare'], function()
 {
-  Route::get('/', 'ProfileController@show');
-  Route::get('/edit', 'ProfileController@edit');
-  Route::post('/update', 'ProfileController@update');
+  Route::get('/', 'Teacher\ProfileController@show');
+  Route::get('/edit', 'Teacher\ProfileController@edit');
+  Route::post('/update', 'Teacher\ProfileController@update');
 });
 
 Route::controllers([

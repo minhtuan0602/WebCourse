@@ -30,6 +30,7 @@
                   <a href="/teacher">Trang Teacher</a>
                 @endif
               </li>
+              <li><a href="/profile/{{ Auth::user()->id }}">Thông tin người dùng</a></li>
               <li><a href="/auth/logout">Đăng xuất</a></li>
             </ul>
           </li>
