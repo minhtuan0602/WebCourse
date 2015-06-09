@@ -1,4 +1,4 @@
-@extends('layout/layout')
+@extends('layout/teacher')
 
 @section('title')
     Chỉnh sửa người dùng
@@ -41,9 +41,7 @@
 
 
       <div class="form-group row">
-        <div class="col-xs-6">
-          {!! Form::label('avatar', 'Chọn hình đại diện: ', array('class' => 'input-label')) !!}
-        </div>
+        {!! Form::label('avatar', 'Chọn hình đại diện: ', array('class' => 'col-md-4 control-label')) !!}
         <div class="col-xs-6">
           {!! Form::file('avatar') !!}
         </div>

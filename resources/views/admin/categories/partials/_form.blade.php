@@ -1,30 +1,18 @@
-<div class="form-group row">
-  <div class="col-xs-6">
-    {!! Form::label('name', 'Tên: ') !!}
-  </div>
-  <div class="col-xs-6">
-    {!! Form::text('name') !!}
-  </div>
-</div>
-
-<div class="form-group row">
-  <div class="col-xs-6">
-    {!! Form::label('slug', 'Slug: ') !!}
-  </div>
-  <div class="col-xs-6">
-    {!! Form::text('slug') !!}
-  </div>
-</div>
-
-<div class="form-group row">
-  <div class="col-xs-6">
-    {!! Form::label('position', 'Vị trí: ') !!}
-  </div>
-  <div class="col-xs-6">
-    {!! Form::text('position') !!}
-  </div>
+<div class="form-group">
+  {!! Form::label('name', 'Tên: ') !!}
+  {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nhập tên']) !!}
 </div>
 
 <div class="form-group">
-    {!! Form::submit($submit_text, ['class'=>'btn primary']) !!}
+  {!! Form::label('slug', 'Slug: ') !!}
+  {!! Form::text('slug', null, ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group">
+  {!! Form::label('position', 'Position: ') !!}
+  {!! Form::input('number', 'position', null, ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group">
+  <input type='submit' value="{{ $submit_text }}" onclick="nicEditors.findEditor('content').saveContent();">
 </div>

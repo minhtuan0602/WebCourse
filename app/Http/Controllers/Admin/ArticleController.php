@@ -55,7 +55,7 @@ class ArticleController extends Controller {
 
 		$input['slug'] = $slug;
 		$input['category_id'] = $category->id;
-		$input['username'] = $request->user()['attributes']['username'];
+		$input['user_id'] = $request->user()['attributes']['id'];
 		$input['dateWrite'] = date('Y-m-d H:i:s');
 
 		$image = Input::file('image');
@@ -66,9 +66,9 @@ class ArticleController extends Controller {
 			$input['image'] = '/image/article/image/'.$filename;
 		}
 
-		Article::create( $input );
+		$article = Article::create( $input );
 	 
-		return Redirect::route('admin.categories.show', $category->slug)->with('message', 'Tạo Article thành công');
+		return Redirect::route('admin.categories.articles.show', [$category->slug, $article->slug])->with('message', 'Tạo Article thành công');
 	}
 
 	public function show(Category $category, Article $article)
@@ -96,7 +96,7 @@ class ArticleController extends Controller {
 		}
 
 		$article->update($input);
-		return view('admin.articles.show', compact('category', 'article'))->with('message', 'Sửa Article thành công');;
+		return Redirect::route('admin.categories.articles.show', [$category->slug, $article->slug])->with('message', 'Sửa Article thành công');;
 	}
 
 	public function destroy(Category $category, Article $article)

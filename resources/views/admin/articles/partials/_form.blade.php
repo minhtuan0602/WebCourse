@@ -1,57 +1,35 @@
-<div class="form-group row">
-  <div class="col-xs-6">
-    {!! Form::label('title', 'Tiêu đề: ') !!}
-  </div>
-  <div class="col-xs-6">
-    {!! Form::text('title') !!}
-  </div>
+<div class="form-group">
+  {!! Form::label('title', 'Tiêu đề: ') !!}
+  {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Nhập tiêu đề']) !!}
 </div>
 
-<div class="form-group row">
-  <div class="col-xs-6">
-    {!! Form::label('description', 'Mô tả ngắn: ') !!}
-  </div>
-  <div class="col-xs-6">
-    {!! Form::textarea('description') !!}
-  </div>
+
+<div class="form-group">
+  {!! Form::label('description', 'Mô tả ngắn: ') !!}
+  {!! Form::text('description', null, ['class' => 'form-control', 'placeholder' => 'Nhập mô tả ngắn']) !!}
 </div>
 
-<div class="form-group row">
-  <div class="col-xs-6">
-    {!! Form::label('content', 'Nội dung: ') !!}
-  </div>
-  <div class="col-xs-6">
-    {!! Form::textarea('content') !!}
-  </div>
-</div>
 
-<div class="form-group row">
-  <div class="col-xs-6">
-    {!! Form::label('tags', 'Tags (ngăn bằng dấu -): ') !!}
-  </div>
-  <div class="col-xs-6">
-    {!! Form::text('tags') !!}
-  </div>
-</div>
-
-<div class="form-group row">
-  <div class="col-xs-6">
-    {!! Form::label('position', 'Vị trí: ') !!}
-  </div>
-  <div class="col-xs-6">
-    {!! Form::text('position') !!}
-  </div>
-</div>
-
-<div class="form-group row">
-  <div class="col-xs-6">
-    {!! Form::label('image', 'Chọn hình ảnh:', array('class' => 'input-label')) !!}
-  </div>
-  <div class="col-xs-6">
-    {!! Form::file('image') !!}
-  </div>
+<div class="form-group">
+  {!! Form::label('content', 'Nội dung: ') !!}
+  {!! Form::textarea('content', null, ['class' => 'textarea', 'id' => 'content', 'style' => 'width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;']) !!}
 </div>
 
 <div class="form-group">
-    {!! Form::submit($submit_text, ['class'=>'btn primary']) !!}
+  {!! Form::label('tags', 'Tags (ngăn nhau bằng -): ') !!}
+  {!! Form::text('tags', null, ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group">
+  {!! Form::label('position', 'Position: ') !!}
+  {!! Form::input('number', 'position', null, ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group">
+  {!! Form::label('image', 'Chọn hình: ', array('class' => 'input-label')) !!}
+  {!! Form::file('image') !!}
+</div>
+
+<div class="form-group">
+  <input type='submit' value="{{ $submit_text }}" onclick="nicEditors.findEditor('content').saveContent();">
 </div>

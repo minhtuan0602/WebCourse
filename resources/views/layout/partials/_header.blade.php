@@ -23,7 +23,14 @@
           <li class="dropdown">
             <a href="#" title="{{ Auth::user()->username }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ str_limit( Auth::user()->username, $limit = 10, $end = '...') }} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="/profile/{{ Auth::user()->id }}">Thông tin</a></li>
+              <li>
+                @if (Auth::user()->type == 'A')
+                  <a href="/admin">Trang Admin</a>
+                @elseif (Auth::user()->type == 'G')
+                  <a href="/teacher">Trang Teacher</a>
+                @endif
+              </li>
+              <li><a href="/profile/{{ Auth::user()->id }}">Thông tin người dùng</a></li>
               <li><a href="/auth/logout">Đăng xuất</a></li>
             </ul>
           </li>

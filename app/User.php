@@ -12,13 +12,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	
 	protected $table = 'users';
 
-	protected $fillable = ['email', 'password', 'username'];
+	protected $fillable = ['email', 'password', 'username', 'type'];
 
 	protected $hidden = ['password', 'remember_token'];
 
 	public function profile()
   {
     return $this->hasOne('App\Profile');
+  }
+
+  public function articles()
+  {
+    return $this->hasMany('App\Article');
   }
 
 }

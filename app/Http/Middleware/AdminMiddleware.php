@@ -8,7 +8,7 @@ class AdminMiddleware {
 	{
 		if (is_null($request->user()) || $request->user()->type != 'A')
     {
-      return redirect('/');
+      return redirect('/auth/login');
     }
 
     return $next($request);

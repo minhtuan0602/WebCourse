@@ -1,4 +1,4 @@
-@extends('layout/layout')
+@extends('layout/teacher')
 
 @section('title')
     Thông tin người dùng
@@ -25,7 +25,7 @@
       <span class="list-group-item"><b>Chi tiết: </b>{{ $profile->detail }}</span>
       <span class="list-group-item"><b>Ngày sinh: </b>{{ $profile->birthday }}</span>
     </div>
-    <div class="right">
+    <div class="left">
       <a href="{{ Auth::user()->id }}/edit" class="btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"> Edit </span></a>
     </div>
   </div>

@@ -17,10 +17,10 @@ class CreateArticlesTable extends Migration {
 			$table->string('position');
 			$table->string('image');
 			$table->text('description');
-			$table->integer('category_id')->unsigned()->index();
+			$table->integer('category_id')->unsigned()->nullable();
       $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-      $table->string('username');
-      $table->foreign('username')->references('username')->on('users')->onDelete('cascade');
+      $table->integer('user_id')->unsigned()->nullable();
+      $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
       $table->date('dateWrite');
 			$table->timestamps();
 		});

@@ -1,4 +1,4 @@
-@extends('layout/layout')
+@extends('layout/admin')
 
 @section('title')
     Chapter
@@ -30,7 +30,7 @@
 
   <p>
     @if (!$category->isBuiltIn)
-      <a href="/admin/editNews/" >Chỉnh sửa trang tin tức</a> |
+      <a href="/admin/edit-news/" >Chỉnh sửa trang tin tức</a> |
     @endif
     <a href="/admin/categories/{{ $category->slug }}/articles/create" >Tạo Article</a>
 </div>
