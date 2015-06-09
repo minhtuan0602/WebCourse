@@ -1,0 +1,510 @@
+#container article{
+	width:100%;
+	height: 100px;
+	position: relative;
+	overflow: hidden;
+}
+
+#navbar {
+	background-color:black;
+	position:fixed;
+	top:0px;
+	width:100%;
+	z-index: 100;
+	overflow: hidden;
+}
+
+#navbar ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-align: center;
+	color : white;
+	height: 100%;
+
+}
+
+#navbar ul li { 
+	display: inline; 
+	padding-left:10px;
+	opacity:1;
+	-webkit-transition: opacity 150ms ease-in-out;
+	-moz-transition: opacity 150ms ease-in-out;
+	-o-transition: opacity 150ms ease-in-out;
+	transition: opacity 150ms ease-in-out;
+	cursor: pointer;
+}
+
+#navbar ul li:hover { 
+	opacity:.7;
+}
+
+#newslogo{
+	position: absolute;
+	z-index: 2;
+}
+
+#listsec {
+	position: relative;
+}
+
+#listsecbg{
+	position : absolute;
+	background-color: black;
+	top: 0px;
+	width: 70%;
+}
+
+#academics section{
+	width:70%;
+	margin: auto;
+	cursor: pointer;
+	position: absolute;
+	overflow: hidden;
+}
+
+.bg{
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	z-index: 1;
+	overflow: hidden;
+}
+
+.bgimg{
+	position: absolute;
+}
+
+.bgveil{
+	background-color: black;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top:0px;
+	left: 0px;
+	z-index: 3;
+}
+
+.title{
+	
+}
+
+.description{
+	display: block;
+}
+
+.acatext {
+	display: none;	
+}
+
+.title, .description, .acatext{
+	position: relative;
+	color: rgb(255, 255, 255);
+	z-index: 2;
+	left:10%;
+	width: 30%;
+}
+
+#listsecbg{
+	position : absolute;
+	background-color: black;
+	top: 0px;
+}
+
+.acabg1,.acabg2 {
+	width: 15%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+#news{
+	background-color: white;
+}
+
+#listnewssec section{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+#listnewssec{
+	position: relative;
+	width: 70%;
+	left: 15%;
+	overflow: hidden;
+}
+
+.bgnews{
+	background-position:top center;
+	background-size: cover;
+	height: 100%;
+	width: 100%;
+	left: 0px;
+	top: 0px;
+	position: absolute;
+	z-index: 1;
+}
+
+#listpoint {
+	margin: 0;
+	padding: 0;
+	position:absolute;
+	top: 200px;
+	height: 15px;
+	width: 100%;
+	text-align: center;
+}
+
+#listpoint ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: inline-block;
+}
+
+#listpoint ul li {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 8px;
+	margin-right: 8px;
+	position: relative;
+	float: left;
+	width: 8px;
+	height: 8px;
+	background-color: white;
+	border-radius: 50%;
+	z-index: 2;
+}
+
+.pointimg{
+	width: 12px;
+	height: 12px;
+	left: -2px;
+	top: -2px;
+	position: absolute;
+	display: block;
+	background-size: cover;
+	background-image: url("../images/logosd.png");
+}
+
+
+.retitle{
+	cursor: pointer;
+	color: rgb(27, 62, 156);
+	font-size: 20px;
+	-webkit-transition: color 150ms ease-in-out;
+	-moz-transition: color 150ms ease-in-out;
+	-o-transition: color 150ms ease-in-out;
+	transition: color 150ms ease-in-out;
+	z-index: 1;
+}
+
+.retitle:hover{
+	color: rgb(15, 41, 92);	
+}
+
+.retitleselected{
+	color: rgb(15, 41, 255) !important;
+	font-weight: bold;
+}
+
+.retext{
+	overflow: hidden;
+	visibility: hidden;
+	height :auto;
+}
+
+
+#accordion{
+	float: left;
+	position: relative;
+	width: 70%;
+	height: 70%;
+	overflow-y: hidden;
+	overflow-x: visible;
+	padding-left: 5%;
+}
+
+#accordion section{
+	position: absolute;
+}
+
+#headerresearch{
+	width: 100%;
+	height: 10%;
+}
+
+#leftresearch{
+	width: 10%;
+	height: 80%;
+	float: left;
+	position: relative;
+}
+
+#footresearch{
+	clear:both;
+	width: 100%;
+	height: 10%;
+}
+
+.circle{
+	background-color: black;
+	position: absolute;
+	border-radius: 50%;
+	width: 5px;
+	height: 5px;
+}
+
+.bigcircle{
+	background-color: black;
+	position: absolute;
+	border-radius: 50%;
+	width: 11px;
+	height: 11px;
+	right: -5px;
+}
+
+#scircleresearch{
+	position: relative;
+	height: 100%;
+	width: 200%;
+	overflow: hidden;
+}
+
+#researchgroup{
+	float: left;
+	position: relative;
+	height: 10%;
+	width: 80%;
+}
+
+.titlegroup{
+	position: absolute;	
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	top:-20px;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+#leftresearchbar, .bordertop, .borderleft, .borderright, .borderbottom{
+	background-color: black;
+	position: absolute;
+}
+
+.bordertop{
+	height: 1px;
+	width: 100%;
+	top: 0px;
+	left: 0px;
+}
+
+.borderbottom{
+	height: 1px;
+	width: 100%;
+	bottom:0px;
+	right: 0px;
+}
+
+.borderleft{
+	height: 100%;
+	width: 1px;
+	bottom: 0px;
+	left: 0px;
+}
+
+.borderright{
+	height: 100%;
+	width: 1px;
+	top: 0px;
+	right: 0px;
+}
+
+#leftresearchbar{
+	height: 100%;
+	width: 1px;
+	right: 0px;
+}
+
+
+#aboutcontent{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+#textabout{
+	width: 40%;
+	overflow: hidden;
+	float: left;
+	position: absolute;
+}
+
+.intextabout{
+	text-align:center;
+}
+
+#logo{
+	margin: auto;
+	width: 100px;
+	height: 100px;
+	position: absolute;
+}
+
+#abouthead{
+	position: relative;
+	top:500px;
+}
+
+.titleabout{
+	position: absolute;	
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+#aboutline{
+	position: absolute;	
+	height: 1px;
+	background-color: black;
+	width: 150px;
+}
+
+#aboutlinelogo{
+	position: absolute;
+	width: 11px;
+	height: 11px;
+}
+
+#about{
+	background-image:url('../images/about.jpg');
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-position: top center;
+	background-size: cover;
+}
+
+div{
+	font-family: "Helvetica";
+}
+
+.stopscroll {
+	height: 100%;
+	overflow: hidden;
+}
+
+#newstopbg{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.newsbg{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#listcate{
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	z-index: 101;
+}
+
+#listcateul{
+	position: absolute;
+	z-index: 3;
+	height: 100%;
+	width: 100%;
+}
+
+#listcate ul{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	list-style: none;
+}
+
+#listcate ul li{
+	width: 100%;
+	cursor: pointer;	
+	text-align: center;
+	color: white;
+	background-color: transparent;
+	font-weight: bold;
+	font-size: 20px;
+	overflow: hidden;
+}
+
+#listcate ul li:hover{
+	color: black;	
+	background-color: white;
+}
+
+#newsbtn{
+	position: absolute;
+	border : 1px solid black;
+	top :100px;
+	left: 100px;
+	cursor: pointer;
+}
+
+#newsbottom{
+	position: absolute;
+	width: 100%;
+	bottom: 0px;
+	z-index: 2;
+	background-color: white;
+}
+
+#newsbody{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top:0px;
+	left: 0px;
+}
+
+#btnclose{
+	border : 1px solid black;
+	cursor: pointer;
+	z-index: 3;
+	width: 46px;
+	margin: auto;
+}
+
+#art{	
+	position: absolute;
+	z-index: 105;
+	top: 100%;
+	width: 100%;
+	background-color: white;
+	min-height: 70%;
+}
+
+.titleart,.bodyart{
+	text-align: center;
+	width: 40%;
+	margin: auto;
+}
+
+.titleart{
+	margin-top: 30px;
+	font-size: 20px;
+	color: blue;
+}
+
+.bodyart{
+	font-size: 12px;
+}
