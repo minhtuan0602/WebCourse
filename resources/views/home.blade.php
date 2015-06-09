@@ -131,10 +131,12 @@
     <script type="text/javascript">
         var _NAVDATA = ['TRANG CHỦ', 'ĐÀO TẠO', 'NGHIÊN CỨU', 'GIỚI THIỆU'];
         var _CATEDATA = ['TẤT CẢ TIN'];
+        var _CATEID = [];
         <?php
         foreach ($category_news as $category) { ?>
             _CATEDATA.push('<?php echo $category->name; ?>'.toUpperCase());
-        <?php 
+            _CATEID.push(<?php echo $category->id; ?>);
+        <?php
         }
         ?>
     </script>
