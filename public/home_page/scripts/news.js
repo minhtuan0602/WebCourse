@@ -26,10 +26,10 @@ var _News = {
 		this.LoopAnimate();
 		//bg
 		var bg = document.getElementById("newstopbg")
-		this._BGNews = new BackGroundImg( bg, 4, 1.5, "/home_page/images/news", 5);
+		this._BGNews = new BackGroundImg( bg, 4, 1.5, "home_page/images/news", 5);
 		this._BGNews.Loop();
 		//cate
-		_ListCate.Init("/home_page/images/news", this._ListImageLength);
+		_ListCate.Init("home_page/images/news", this._ListImageLength);
 		//btn
 		this._BtnNews = $("#newsbtn");
 		$(this._BtnNews).attr("onclick", "_ListCate.Open()");
@@ -355,6 +355,44 @@ var _ListCate = {
 			},
 			onCompleteScope : this
 		});	
+	}, 
+
+	GetNewArticle : function(pos){
+		var Data = {
+			Title : "asdas",
+			Body : "Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut123"
+		}
+
+		$(this._Art.children()[0]).html(Data.Title);
+		$(this._Art.children()[1]).html(Data.Body);
+	},
+
+	GetCategory : function(){
+		var Data = {
+			Title:"asdsad",
+			Body:[
+			{Id:0,Title:"lol"},
+			{Id:1,Title:"lol2"},
+			{Id:2,Title:"lol3"}]
+		};
+		var html = '<div class="listart">';
+		for (var i = 0; i < Data.Body.length; i++) {
+			html += '<a>' + Data.Body[i].Title + '</a>';
+		}
+		html += '</div>';
+		$(this._Art.children()[0]).html(Data.Title);
+		$(this._Art.children()[1]).html(html);
+
+		var listart = $(".listart a");
+		for (var i = 0; i < Data.Body.length; i++) {
+			$(listart).attr("onclick", "_ListCate.GetNewArticle(" + Data.Body[i].Href + ")");
+		}
+	},
+
+	CallServer : function(){
+		$.get( "http://localhost:8000/search",{string:"thống"} ,function(result) {
+			console.log(result);
+		});
 	}
 };
 

@@ -106,7 +106,7 @@ var _Academics = {
 
 	CheckVeil : function(){
 		for (var i = 0; i < this._ListSectionLength; i++) {
-			if (this.CheckMouseInsideDiv(this._ListSection[i]))
+			if (this.CheckMouseInsideDiv(this._ListSection[i].Section))
 				this._ListSection[i].UnVeil();
 			else
 				this._ListSection[i].Veil();
@@ -115,7 +115,12 @@ var _Academics = {
 
 	CheckMouseInsideDiv : function(obj){
 		var Top = $(obj).position().top;
-		var Left = $(obj).position().top;
+		var Left = $(obj).position().left;
+		var Height = $(obj).outerHeight(true);
+		var Width = $(obj).outerWidth(true);
+		var X = _MousePos.x;
+		var Y = _MousePos.y - _WinHeight;
+		return (X >= Left && X <= Left + Width && Y >= Top && Y <= Top + Height);
 	},
 
 	LoopBackground : function(){
@@ -147,10 +152,12 @@ var _Academics = {
 		if (!this._isInArticle) return;
 		this.EndLoopBackground();
 		this._isInArticle = false;
-		for (var i = 0; i < this._ListSectionLength; i++) {
-			if (!this._ListSection[i].isVeiled){
-				this._ListSection[i].Veil();
-			}
+		if (!this._isExpanded){
+			for (var i = 0; i < this._ListSectionLength; i++) {
+				if (!this._ListSection[i].isVeiled){
+					this._ListSection[i].Veil();
+				}
+			}	
 		}
 		for (var i = 0; i < 2; i++) {
 			if (this._ListBackground[i].Tween != null){
@@ -164,6 +171,9 @@ var _Academics = {
 	InArticle : function(){
 		if (this._isInArticle) return;
 		this.LoopBackground();
+		if (!this._isExpanded){
+			this.CheckVeil();	
+		}
 		this._isInArticle = true;
 	}
 }
@@ -238,13 +248,6 @@ AcademicsSection.prototype.Animate = function(){
 		},
 		onUpdateParams : [this.BGImg, this.position * _WinInsideHeight * _AcaMinimumPercent / 100]
 	});
-	//console.log(this.position * _WinInsideHeight * _AcaMinimumPercent / 100 - Top);
-	// var ImgTop = this.position * _WinInsideHeight * _AcaMinimumPercent / 100 - Top;
-	// if (this.TweenBGImg != null){this.TweenBGImg.kill();}
-	// this.TweenBGImg = TweenLite.to(this.BGImg, _AcaTime, {
-	// 	top: ImgTop,
-	// 	ease: "easeInOutCubic"
-	// });
 }
 
 AcademicsSection.prototype.Veil = function(){
@@ -326,8 +329,8 @@ AcademicsBackground.prototype.SetZIndex = function(index){
 }
 
 AcademicsBackground.prototype.SetBg = function(position){
-	var url_left = "url('/home_page/images/aca"+ (position+1) +"_left.jpg')";
+	var url_left = "url('home_page/images/aca"+ (position+1) +"_left.jpg')";
 	$(this.Background[0]).css("background-image", url_left);
-	var url_right = "url('/home_page/images/aca"+ (position+1) +"_right.jpg')";
+	var url_right = "url('home_page/images/aca"+ (position+1) +"_right.jpg')";
 	$(this.Background[1]).css("background-image", url_right);
 }

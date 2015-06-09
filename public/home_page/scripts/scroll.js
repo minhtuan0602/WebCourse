@@ -4,6 +4,7 @@ var _State;
 var _NORMALSTATE = 0;
 var _LISTCATESTATE = 1;
 var _ARTICLESTATE = 2;
+var _FOOTERSTATE = 3;
 
 function preventDefault(e){
 	e = e || window.event;
@@ -26,10 +27,27 @@ function MouseScroll(event) {
 	} else {
 		delta = -40 * event.detail;
 	}
+	//console.log(delta);
 	if (_State == _NORMALSTATE){
-		ScrollNormal(delta);
+		if (!_Scrolling && _Position == 3 && delta < 0){
+			_State = _FOOTERSTATE;
+			_Footer.Show();
+		} else {
+			ScrollNormal(delta);	
+		}
 	} else if (_State == _ARTICLESTATE){
  		ScrollArticle(delta);
+	} else if (_State == _FOOTERSTATE){
+		ScrollFooter(delta);
+	}
+}
+
+var _FooterTimer;
+function ScrollFooter(delta){
+	if (delta > 0){
+		_Footer.Hide();
+		clearTimeout(_FooterTimer);
+		_FooterTimer = setTimeout(function(){ _State = _NORMALSTATE; }, 200);
 	}
 }
 
@@ -90,7 +108,7 @@ function ScrollToPosition(event){
 
 		_Scrolling = false;
 		TweenLite.to(window, 1, {
-			scrollTo:{ y:_WinInsideHeight * position }, 
+			scrollTo:{ y: _WinInsideHeight * position }, 
 			ease: "easeInOutCubic",
 			onComplete : function(){
 				_Position = position;
@@ -101,5 +119,49 @@ function ScrollToPosition(event){
 				}
 			}
 		});
+	}
+}
+
+var _Footer = {
+	_Obj : null,
+	_isExpanded : false,
+	_ExpandTime : 1,
+
+	Init : function(){
+		this._Obj = $("#footer");
+		$(this._Obj).hide();
+	},
+
+	onWindowResize : function(){
+		if (this._isExpanded){
+			$(this._Obj).css("bottom", 0);
+		} else {
+			$(this._Obj).css("bottom", -_FOOTERHEIGHT);
+		}
+	},
+
+	Show : function(){
+		if (this._isExpanded) return;
+		$(this._Obj).show();
+		TweenLite.killTweensOf(this._Obj);
+		TweenLite.to(this._Obj, this._ExpandTime, {
+			bottom : 0, 
+			ease: "easeInOutCubic"
+		});
+		this._isExpanded = true;
+	},
+
+	Hide : function(){
+		if (!this._isExpanded) return;
+		TweenLite.killTweensOf(this._Obj);
+		TweenLite.to(this._Obj, this._ExpandTime, {
+			bottom : -_FOOTERHEIGHT, 
+			ease: "easeInOutCubic",
+			onComplete : function(){
+				$(this._Obj).hide();
+			},
+			onCompleteScope : this
+		});
+		this._isExpanded = false;
 	}
 }

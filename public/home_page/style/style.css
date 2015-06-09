@@ -508,3 +508,63 @@ div{
 .bodyart{
 	font-size: 12px;
 }
+
+#footer{
+	position: fixed;
+	bottom:0px;
+	left: 0px;
+	background-color: black;
+	width: 100%;
+	z-index: 200;
+	height: 150px;
+}
+
+#footertext{
+	margin-top: 10px;
+	text-align: center;
+	color: white;
+	font-size: 12px;
+}
+
+#footertop{
+	height: 50px;
+	width: 100%;
+	position: relative;
+	float: left;
+}
+
+#footerbot{
+	height: 100px;
+	width: 100%;
+	position: relative;
+	float: left;
+}
+
+#footercontent{
+	width: 100px;
+	margin: auto;
+	height: 100%;
+	border-bottom: 1px solid white;
+	position: relative;
+}
+
+#footerlinelogo{
+	position: absolute;
+	width: 11px;
+	height: 11px;
+	background-color: red;
+	bottom: -6px;
+	left: 44px;
+}
+
+#footershare{
+	width: 100%;
+	margin: auto;
+	text-align: center;
+	margin-top : 5px;
+}
+
+.sharebtn{
+	width: 15px;
+	height: 15px;
+}

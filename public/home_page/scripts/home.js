@@ -7,6 +7,7 @@ $( document ).ready(function() {
 	_News.Init();
 	_Research.Init();
 	_About.Init();
+	_Footer.Init();
 	
 	WindowResize();
 	WindowResize();
@@ -25,6 +26,7 @@ $(document).mousemove(function(event) {
 
 var _WinHeight, _WinWidth, _WinInsideHeight;
 var _NAVBARHEIGHT = 46;
+var _FOOTERHEIGHT = 150;
 
 function WindowResize(){
 	_WinHeight = $(window).height();
@@ -39,6 +41,7 @@ function WindowResize(){
 	_Research.onWindowResize();
 	_About.onWindowResize();
 	_ListCate.onWindowResize();
+	_Footer.onWindowResize();
 	$(document).scrollTop(_WinInsideHeight * _Position);
 }
 
