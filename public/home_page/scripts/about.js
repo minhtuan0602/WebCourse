@@ -3,7 +3,7 @@ var _AboutLogoHeightPercent = 20;
 var _AboutLogoMinWidthPercent = 50;
 var _AboutLogoUpPercent = 7;
 var _AboutTextWidthPercent = 40;
-var _AboutLineDownPercent = 7;
+var _AboutLineDownPercent = 10;
 var _AboutTitleDownPercent = 14;
 var _AboutLineWidth = 150;
 var _AboutBtnWidthPercent = 15;
@@ -20,6 +20,8 @@ var _About = {
 	_Btn : [],
 	_Length : 0,
 	_Selected : 0,
+	_TopTextIn : 0,
+	_BoxTextIn : {},
 
 	Init : function(){
 		this._Logo = $('#logo');
@@ -32,17 +34,46 @@ var _About = {
 		this._Length = this._Title.length;
 
 		for (var i = 0; i < this._Length; i++) {
+			$(this._Title[i]).html($(this._Title[i]).html().toUpperCase());
 			this._Btn[i] = new Btn(this._Title[i]);
 			$(this._Title[i]).attr("onmouseover", "_About.BtnOver("+ i +")");
 			$(this._Title[i]).attr("onmouseout", "_About.BtnOut("+ i +")");
 			$(this._Title[i]).attr("onclick", "_About.BtnOpen("+ i +")");
 			if (i != this._Selected){
 				this._Btn[i].RemoveBorder();
+				$(this._TextIn[i]).css("z-index", 0);
+				
 			} else {
 				this._Btn[i].ChangeCursor(true);
+				$(this._TextIn[i]).css("z-index", 1);
 			}
 			if (i != this._Length - 1)
 				this._Btn[i].AddLine();
+		}
+		this._BoxTextIn.inside = false;
+	},
+
+	onScrollInText : function(delta){
+		this._TopTextIn += delta;
+		var maxtop = -($(this._TextIn[this._Selected]).outerHeight(true) - this._BoxTextIn.height);
+		if (this._TopTextIn < maxtop){
+		 	$(this._TextIn[this._Selected]).css("top", maxtop);
+		 	this._TopTextIn = maxtop;
+		} else if (this._TopTextIn > 0){
+			$(this._TextIn[this._Selected]).css("top", 0);
+			this._TopTextIn = 0;
+		} else {
+			$(this._TextIn[this._Selected]).css("top", this._TopTextIn);
+		}
+	},
+
+	onMouseMove : function(x, y){
+		y = y - this._BoxTextIn.ptop;
+		if (x >= this._BoxTextIn.left && x <= this._BoxTextIn.left + this._BoxTextIn.width
+			&& y >= this._BoxTextIn.top && y <= this._BoxTextIn.top + this._BoxTextIn.height){
+			this._BoxTextIn.inside = true;
+		} else {
+			this._BoxTextIn.inside = false;
 		}
 	},
 
@@ -55,6 +86,12 @@ var _About = {
 		for (var i = 0; i < this._Length; i++) {
 			this._Btn[i].Resize(Left + (Width - 1)* i, Width);
 		}
+
+		this._BoxTextIn.ptop = $("#about").position().top;
+		this._BoxTextIn.height = $(this._Text).outerHeight(true);
+		this._BoxTextIn.width = $(this._Text).outerWidth(true);
+		this._BoxTextIn.top = $(this._Text).position().top;
+		this._BoxTextIn.left = $(this._Text).position().left;
 	},
 
 	BtnOver : function(position){
@@ -74,11 +111,21 @@ var _About = {
 		$(this._Title[position]).css("cursor", "default");
 
 		$(this._TextIn[this._Selected]).hide();
+		$(this._TextIn[position]).css("top", 0);
+
+		$(this._TextIn[position]).css("z-index", 1);
+		$(this._TextIn[this._Selected]).css("z-index", 0);
+
+		this._TopTextIn = 0;
 		$(this._TextIn[position]).show();
 
 		this._Selected = position;
 		this.Animate(false);
 		this._Btn[temp].Out();
+	},
+
+	OpenProfile : function(id){
+		
 	},
 
 	Animate : function(im){

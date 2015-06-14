@@ -14,8 +14,8 @@ var _Academics = {
 	_isExpanded : false,
 	_PrevPosition : -1,
 	_ListBackground : [],
-	_BackgroundFront : 0,
 	_BackgroundIndex : 0,
+	_BackgroundPrevIndex : -1,
 	_Timer : -1,
 	_isInArticle : false,
 	_isExpanding : false,
@@ -29,15 +29,18 @@ var _Academics = {
 		for (var i = 0; i < this._ListSectionLength; i++) {
 			this._ListSection[i] = new AcademicsSection(Section[i], i);
 		}
+		var Article =  document.getElementById('academics');
 		//init background
-		for (var i = 0; i < 2 ; i++){
-			var Background = $('#academics .acabg' + (i + 1));
+		for (var i = 0; i < this._ListSectionLength ; i++){
+			var Background = [];
+			Background[0] = CreateDiv(Article, "acabg");
+			Background[1] = CreateDiv(Article, "acabg");
 			this._ListBackground[i] = new AcademicsBackground(Background);
-			if (i == this._BackgroundFront){
-				this._ListBackground[i].SetBg(this._BackgroundIndex);
-				this._ListBackground[i].SetZIndex(_FRONTINDEX);
+			this._ListBackground[i].SetBg(i);
+			if (i == this._BackgroundIndex){
+				this._ListBackground[i].SetVisible(true);
 			} else {
-				this._ListBackground[i].SetZIndex(_BACKINDEX);
+				this._ListBackground[i].SetVisible(false);
 			}
 		}
 	},
@@ -45,8 +48,6 @@ var _Academics = {
 	onWindowResize : function(){
 		for (var i = 0; i < this._ListSectionLength; i++) {
 			this._ListSection[i].Resize();
-		}
-		for (var i = 0; i < 2; i++) {
 			this._ListBackground[i].Resize();
 		}
 	},
@@ -59,6 +60,7 @@ var _Academics = {
 			}
 			this._ListSection[this._PrevPosition].Veil();
 			this._ListSection[this._PrevPosition].ChangeCursor(false);
+			this._BackgroundPrevIndex = this._BackgroundIndex;
 			this._BackgroundIndex = this._PrevPosition;
 			this.LoopBackground();
 		} else {
@@ -71,6 +73,7 @@ var _Academics = {
 			}
 			this._ListSection[position].UnVeil();
 			this._ListSection[position].ChangeCursor(true);
+			this._BackgroundIndex = position;
 			this.EndLoopBackground();
 			this.BackgroundAnimate(position);
 		}
@@ -126,6 +129,7 @@ var _Academics = {
 	LoopBackground : function(){
 		clearTimeout(_Academics._Timer);
 		_Academics._Timer = setTimeout(function(){
+			_Academics._BackgroundPrevIndex = _Academics._BackgroundIndex;
 			_Academics._BackgroundIndex++;
 			_Academics._BackgroundIndex = _Academics._BackgroundIndex % _Academics._ListSectionLength;
 			_Academics.BackgroundAnimate(_Academics._BackgroundIndex);
@@ -138,14 +142,19 @@ var _Academics = {
 	}, 
 
 	BackgroundAnimate : function(index){
-		var BackgroundBack = 1 - this._BackgroundFront;
-
-		this._ListBackground[BackgroundBack].SetBg(index);
-
-		this._ListBackground[BackgroundBack].FadeIn();
-		this._ListBackground[this._BackgroundFront].FadeOut();
-
-		this._BackgroundFront = BackgroundBack;
+		for (var i = 0; i < this._ListSectionLength; i++) {
+			if (this._ListBackground[i].Tween != null){this._ListBackground[i].Tween.kill();}
+			if (i == this._BackgroundIndex){
+				this._ListBackground[i].SetType(0);
+			} else if (i == this._BackgroundPrevIndex){
+				this._ListBackground[i].SetType(1);
+			} else {
+				this._ListBackground[i].SetType(2);
+			}
+		}
+		this._ListBackground[this._BackgroundIndex].FadeIn();
+		if (this._BackgroundPrevIndex != -1)
+			this._ListBackground[this._BackgroundPrevIndex].FadeOut();
 	}, 
 
 	OutArticle : function(){
@@ -159,13 +168,15 @@ var _Academics = {
 				}
 			}	
 		}
-		for (var i = 0; i < 2; i++) {
+		for (var i = 0; i < this._ListSectionLength; i++) {
 			if (this._ListBackground[i].Tween != null){
 				this._ListBackground[i].Tween.kill();	
 			}
+			if (i == this._BackgroundIndex)
+				this._ListBackground[i].SetVisible(true);
+			else 
+				this._ListBackground[i].SetVisible(false);
 		}
-		this._ListBackground[this._BackgroundFront].SetZIndex(_FRONTINDEX);
-		this._ListBackground[1 - this._BackgroundFront].SetZIndex(_BACKINDEX);
 	},
 
 	InArticle : function(){
@@ -197,6 +208,8 @@ var AcademicsSection = function(obj, position){
 }
 
 AcademicsSection.prototype.Init = function() {
+	$(this.Title).html($(this.Title).html().toUpperCase());
+	$(this.Description).html($(this.Description).html() + "<br/><br/>>Tìm hiểu thêm");
 	$(this.Section).attr("onclick", "_Academics.Expand("+ this.position +")");
 	$(this.Section).attr("onmouseover", "_Academics.UnVeil("+ this.position +")");
 	$(this.Section).attr("onmouseout", "_Academics.Veil("+ this.position +")");
@@ -297,34 +310,46 @@ AcademicsBackground.prototype.Resize = function(){
 	$(this.Background).css("background-size", bgSize);
 	$(this.Background).css("width", bgWidth);
 	$(this.Background).css("height", bgHeight);
+	$(this.Background[0]).css("left", 0);
 	$(this.Background[1]).css("left", _WinWidth * 0.85);
 }
 
 AcademicsBackground.prototype.FadeOut = function(){
-	if (this.Tween != null){this.Tween.kill();}
-
-	$(this.Background).css("opacity", 1);
-	$(this.Background).css("z-index", _FRONTINDEX);
-	
 	this.Tween = TweenLite.to(this.Background, 1.5, {
-		opacity: 0,
+		onComplete : function () {
+			$(this.Background).css("opacity", 0);			
+		},
+		onCompleteScope : this
+	});	
+}
+
+AcademicsBackground.prototype.FadeIn = function(){
+	this.Tween = TweenLite.to(this.Background, 1.5, {
+		opacity: 1,
 		ease: "easeInOutSine"
 	});
 }
 
-AcademicsBackground.prototype.FadeIn = function(){
-	if (this.Tween != null){this.Tween.kill();}
-
-	$(this.Background).css("opacity", 1);
-	$(this.Background).css("z-index", _BACKINDEX);
-}
-
-AcademicsBackground.prototype.SetZIndex = function(index){
-	$(this.Background).css("z-index", index);
-	if (index == _FRONTINDEX){
+AcademicsBackground.prototype.SetType = function(type){
+	if (type == 0){
+		$(this.Background).css("opacity", 0);
+		$(this.Background).css("z-index", _FRONTINDEX);
+	} else if (type == 1){
 		$(this.Background).css("opacity", 1);
+		$(this.Background).css("z-index", _BACKINDEX);
 	} else {
 		$(this.Background).css("opacity", 0);
+		$(this.Background).css("z-index", _BACKINDEX);
+	}
+}
+
+AcademicsBackground.prototype.SetVisible = function(visible){
+	if (visible){
+		$(this.Background).css("opacity", 1);
+		$(this.Background).css("z-index", _FRONTINDEX);	
+	} else {
+		$(this.Background).css("opacity", 0);
+		$(this.Background).css("z-index", _BACKINDEX);	
 	}
 }
 

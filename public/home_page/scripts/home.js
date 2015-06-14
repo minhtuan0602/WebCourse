@@ -22,7 +22,14 @@ var _MousePos = { x: -1, y: -1 };
 $(document).mousemove(function(event) {
 	_MousePos.x = event.pageX;
 	_MousePos.y = event.pageY;
+	_About.onMouseMove(_MousePos.x, _MousePos.y);
 });
+
+$(document).keydown(function(objEvent) {
+    if (objEvent.keyCode == 9) {  //tab pressed
+        objEvent.preventDefault(); // stops its action
+    }
+})
 
 var _WinHeight, _WinWidth, _WinInsideHeight;
 var _NAVBARHEIGHT = 46;
@@ -64,32 +71,3 @@ var _Articles = {
 		}	
 	}
 };
-
-// $( document ).ready(function() {
-// 	$(document).scrollTop(0);
-// 	InitArticles();
-// 	InitAcademics();
-// 	InitResearch();
-// 	InitAbout();
-// 	InitNews();
-// 	WindowResize();
-// 	//add event
-// 	$(window).resize(WindowResize);
-
-// 	//navbar
-// 	initNavBar(nav_data);
-// });
-
-// var _WinHeight;
-// var _WinWidth;
-// var _WinInsideHeight;
-// var _ArticlesLength;
-// var _Articles = [];
-// var _NAVBARHEIGHT = 46;
-// function InitArticles(){
-// 	$('#container').css("margin-top", 0);
-// 	$('#navbar').css("height", _NAVBARHEIGHT);
-// 	$('#navbar').css("line-height", _NAVBARHEIGHT + 'px');
-// 	_Articles = document.getElementsByTagName('article');
-// 	_ArticlesLength = _Articles.length;
-// }

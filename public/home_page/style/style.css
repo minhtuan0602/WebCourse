@@ -14,28 +14,40 @@
 	overflow: hidden;
 }
 
-#navbar ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	text-align: center;
-	color : white;
-	height: 100%;
-
+.navdot{
+	cursor: default;
+	position: relative;
+	float: left;
+	width: 46px;
+	height: 46px;
+	background-image: url("../images/dot.png");
 }
 
-#navbar ul li { 
-	display: inline; 
-	padding-left:10px;
+.navp {
+	padding: 0px;
+	list-style: none;
+	color : white;
+	height: 100%;
+	position: relative;
+	margin: auto;
+	width: 589px;
+}
+
+.navc{ 
+	padding-right: 20px;
+	padding-left: 20px;
+	position: relative;
+	float: left;
 	opacity:1;
 	-webkit-transition: opacity 150ms ease-in-out;
 	-moz-transition: opacity 150ms ease-in-out;
 	-o-transition: opacity 150ms ease-in-out;
 	transition: opacity 150ms ease-in-out;
 	cursor: pointer;
+	font-size: 13px;
 }
 
-#navbar ul li:hover { 
+.navc:hover { 
 	opacity:.7;
 }
 
@@ -86,11 +98,14 @@
 }
 
 .title{
-	
+	font-size: 20px;
+	font-weight: bold;
+	overflow: hidden;
 }
 
 .description{
 	display: block;
+	font-size: 13px;
 }
 
 .acatext {
@@ -111,7 +126,7 @@
 	top: 0px;
 }
 
-.acabg1,.acabg2 {
+.acabg {
 	width: 15%;
 	height: 100%;
 	position: absolute;
@@ -192,44 +207,48 @@
 
 .retitle{
 	cursor: pointer;
-	color: rgb(27, 62, 156);
-	font-size: 20px;
+	color: rgb(23, 66, 175);
+	font-size: 17px;
+	height: 27px;
+	line-height: 27px;
 	-webkit-transition: color 150ms ease-in-out;
 	-moz-transition: color 150ms ease-in-out;
 	-o-transition: color 150ms ease-in-out;
 	transition: color 150ms ease-in-out;
 	z-index: 1;
+	overflow: hidden;
 }
 
 .retitle:hover{
-	color: rgb(15, 41, 92);	
+	color: rgb(18, 38, 90);	
 }
 
 .retitleselected{
-	color: rgb(15, 41, 255) !important;
+	color: rgb(18, 38, 90) !important;
 	font-weight: bold;
 }
 
 .retext{
+	font-size: 15px;
 	overflow: hidden;
 	visibility: hidden;
 	height :auto;
 }
 
-
-#accordion{
-	float: left;
-	position: relative;
-	width: 70%;
-	height: 70%;
-	overflow-y: hidden;
-	overflow-x: visible;
-	padding-left: 5%;
+.retextin{
+	padding-top: 13px;
+	padding-bottom: 26px;
 }
 
 #accordion section{
 	position: absolute;
 }
+
+#research{
+	background-image:url('../images/bgresearch.jpg');
+	background-size:cover;	
+}
+
 
 #headerresearch{
 	width: 100%;
@@ -237,10 +256,27 @@
 }
 
 #leftresearch{
-	width: 10%;
+	width: 23%;
 	height: 80%;
 	float: left;
 	position: relative;
+}
+
+#accordion{
+	float: left;
+	position: relative;
+	width: 54%;
+	height: 70%;
+	overflow-y: hidden;
+	overflow-x: visible;
+	padding-left: 1.1%;
+}
+
+#researchgroup{
+	float: left;
+	position: relative;
+	height: 14%;
+	width: 54%;
 }
 
 #footresearch{
@@ -261,9 +297,9 @@
 	background-color: black;
 	position: absolute;
 	border-radius: 50%;
-	width: 11px;
-	height: 11px;
-	right: -5px;
+	width: 15px;
+	height: 15px;
+	right: -6px;
 }
 
 #scircleresearch{
@@ -273,14 +309,8 @@
 	overflow: hidden;
 }
 
-#researchgroup{
-	float: left;
-	position: relative;
-	height: 10%;
-	width: 80%;
-}
-
 .titlegroup{
+	font-size: 16.46px;
 	position: absolute;	
 	height: 40px;
 	line-height: 40px;
@@ -325,7 +355,7 @@
 
 #leftresearchbar{
 	height: 100%;
-	width: 1px;
+	width: 3px;
 	right: 0px;
 }
 
@@ -345,6 +375,9 @@
 
 .intextabout{
 	text-align:center;
+	position: absolute;
+	top: 0px;
+	opacity :0;
 }
 
 #logo{
@@ -382,6 +415,7 @@
 }
 
 #about{
+	font-size: 13.71px;
 	background-image:url('../images/about.jpg');
 	width: 100%;
 	height: 100%;
@@ -392,7 +426,7 @@
 }
 
 div{
-	font-family: "Helvetica";
+	font-family: "Arial";
 }
 
 .stopscroll {
@@ -404,6 +438,7 @@ div{
 	position: absolute;
 	width: 100%;
 	height: 100%;
+	z-index: 0;
 }
 
 .newsbg{
@@ -452,20 +487,56 @@ div{
 	background-color: white;
 }
 
-#newsbtn{
-	position: absolute;
-	border : 1px solid black;
-	top :100px;
-	left: 100px;
-	cursor: pointer;
-}
-
 #newsbottom{
 	position: absolute;
 	width: 100%;
 	bottom: 0px;
 	z-index: 2;
 	background-color: white;
+	overflow: hidden;
+}
+
+#newsbox{
+	position: relative;
+	width: 100%;
+}
+
+#newstitle,#newstext{
+	position: relative;
+	width: 30%;
+	margin: auto;
+	text-align: center;
+}
+
+#newstitle{
+	font-size: 20px;
+}
+
+#newstext{
+	font-size: 15px;
+	padding-bottom: 20px;
+}
+
+#newsbtn{
+	position: relative;
+	cursor: pointer;
+	margin: auto;
+	width: 152px;
+	height: 46px;
+	line-height: 46px;
+	text-align: center;
+	color: white;
+	font-size: 20px;
+	background-image: url('../images/newsicon.jpg');
+
+	-webkit-transition: 150ms ease-in-out;
+	-moz-transition: 150ms ease-in-out;
+	-o-transition: 150ms ease-in-out;
+	transition: 150ms ease-in-out;
+}
+
+#newsbtn:hover{
+	font-size: 18px;
 }
 
 #newsbody{
@@ -474,14 +545,28 @@ div{
 	height: 100%;
 	top:0px;
 	left: 0px;
+	z-index: 1;
 }
 
 #btnclose{
-	border : 1px solid black;
 	cursor: pointer;
 	z-index: 3;
 	width: 46px;
+	height: 46px;
 	margin: auto;
+	background-image: url("../images/close.png");
+	background-size: 46px 46px;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	-webkit-transition: 100ms ease-in-out;
+	-moz-transition: 100ms ease-in-out;
+	-o-transition: 100ms ease-in-out;
+	transition: 100ms ease-in-out;
+}
+
+#btnclose:hover{
+	background-size: 40px 40px;
 }
 
 #art{	
@@ -567,4 +652,17 @@ div{
 .sharebtn{
 	width: 15px;
 	height: 15px;
+}
+
+p {
+	margin: 0px;
+}
+
+a{
+	text-decoration: none;
+	color: rgb(23, 66, 175);
+}
+
+a:hover{
+	color: rgb(18, 38, 90);
 }

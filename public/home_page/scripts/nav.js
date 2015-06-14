@@ -4,17 +4,20 @@ var _Nav = {
 	Init : function(nav_data){
 		$('#navbar').css("height", _NAVBARHEIGHT);
 		$('#navbar').css("line-height", _NAVBARHEIGHT + 'px');
-		var html = '<ul>';
+		var html = '<div class="navp">';
 		for (var i = 0; i < nav_data.length; i++) {
-			html += '<li>' + nav_data[i] + '</li>';
+			html += '<div class="navc">' + nav_data[i].toUpperCase() + '</div>';
+			if (i != nav_data.length - 1){
+				html += '<div class="navdot"></div>';	
+			}
 		}
-		html += '</ul>';
+		html += '</div>';
 		$('#navbar').append(html);
 
-		var NavBarLi = $('#navbar ul li');
+		var NavBarLi = $('.navc');
 		for (var i = 0; i < NavBarLi.length; i++) {
 			NavBarLi[i].addEventListener("click", ScrollToPosition, false);
-			NavBarLi[i].position = i;
+			NavBarLi[i].position = i;	
 		};
 	},
 

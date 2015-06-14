@@ -11,6 +11,7 @@ var _News = {
 	_BtnNews : null,
 	_BotNews : null,
 	_BodyNews : null,
+	_BoxNews : null,
 	_LogoSizePercent : 10,
 	_LogoPaddingPercent : 1,
 
@@ -34,6 +35,7 @@ var _News = {
 		this._BtnNews = $("#newsbtn");
 		$(this._BtnNews).attr("onclick", "_ListCate.Open()");
 		//bottom
+		this._BoxNews = $("#newsbox");
 		this._BotNews = $("#newsbottom");
 		this._BodyNews = $("#newsbody");
 	},
@@ -67,7 +69,11 @@ var _News = {
 		for (var i = 0; i < this._ListImageLength; i++) {
 			this._ListImage[i].Resize();
 		}
-		$(this._BotNews).css("height", _WinHeight - (Top + Height));
+
+		var NewsBottomHeight = _WinHeight - (Top + Height);
+		$(this._BotNews).css("height", NewsBottomHeight);
+		var NewsBoxTop = (NewsBottomHeight - $(this._BoxNews).outerHeight(true))/2;
+		$(this._BoxNews).css("top", NewsBoxTop);
 	},
 
 	OnClick : function(event){
@@ -183,7 +189,7 @@ var _ListCate = {
 		this._Art = $("#art");
 		$(this._Obj).hide();
 		$(this._Obj).css("top", "-100%");
-		this.InitUl(_CATEDATA);
+		this.InitUl(_CATEDATA, _CATEID);
 		this._CloseBtn = $("#btnclose");
 		$(this._CloseBtn).css("height" ,_NAVBARHEIGHT);
 		$(this._CloseBtn).attr("onclick", "_ListCate.BtnClose()");
@@ -197,7 +203,7 @@ var _ListCate = {
 		}
 	},
 
-	InitUl : function(data){
+	InitUl : function(data, dataid){
 		var html = '<ul>';
 		for (var i = 0; i < data.length; i++) {
 			html += '<li>' + data[i] + '</li>';
@@ -209,7 +215,7 @@ var _ListCate = {
 		this._ListLiLength = this._ListLi.length;
 		for (var i = 0; i < this._ListLiLength; i++) {
 			this._ListLi[i].addEventListener("click", _ListCate.Click, false);
-			this._ListLi[i].position = i;
+			this._ListLi[i].position = dataid[i];
 		}
 	},
 
@@ -229,8 +235,8 @@ var _ListCate = {
 		}
 	},
 
-	Click : function(){
-		//console.log(this);
+	Click : function(event){
+		_ListCate.GetCategory(event.target.position);
 		_ListCate.ShowArt();
 	},
 
@@ -357,41 +363,36 @@ var _ListCate = {
 		});	
 	}, 
 
-	GetNewArticle : function(pos){
-		var Data = {
-			Title : "asdas",
-			Body : "Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo utMauris mauris ante, blandit et, ultrices a, suscipit eget, quam</a>. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut123"
-		}
-
-		$(this._Art.children()[0]).html(Data.Title);
-		$(this._Art.children()[1]).html(Data.Body);
+	GetArticle : function(idart){
+		this.CallServer("get-article", {id: idart}, function(Data){
+			console.log(Data);
+			$(_ListCate._Art.children()[0]).html(Data.title);
+			$(_ListCate._Art.children()[1]).html(Data.body);
+		});
 	},
 
-	GetCategory : function(){
-		var Data = {
-			Title:"asdsad",
-			Body:[
-			{Id:0,Title:"lol"},
-			{Id:1,Title:"lol2"},
-			{Id:2,Title:"lol3"}]
-		};
-		var html = '<div class="listart">';
-		for (var i = 0; i < Data.Body.length; i++) {
-			html += '<a>' + Data.Body[i].Title + '</a>';
-		}
-		html += '</div>';
-		$(this._Art.children()[0]).html(Data.Title);
-		$(this._Art.children()[1]).html(html);
+	GetCategory : function(idcate){
+		if (idcate == -1 || idcate == "-1") return;
+		this.CallServer("get-category", {id: idcate}, function(Data){
+			console.log(Data);
+			var html = '<div class="listart">';
+			for (var i = 0; i < Data.body.length; i++) {
+				html += '<a>' + Data.body[i].title + '</a>';
+			}
+			html += '</div>';
+			$(_ListCate._Art.children()[0]).html(Data.title);
+			$(_ListCate._Art.children()[1]).html(html);
 
-		var listart = $(".listart a");
-		for (var i = 0; i < Data.Body.length; i++) {
-			$(listart).attr("onclick", "_ListCate.GetNewArticle(" + Data.Body[i].Href + ")");
-		}
+			var listart = $(".listart a");
+			for (var i = 0; i < Data.body.length; i++) {
+				$(listart[i]).attr("onclick", "_ListCate.GetArticle(" + Data.body[i].id + ")");
+			}
+		});
 	},
 
-	CallServer : function(){
-		$.get( "http://localhost:8000/search",{string:"thống"} ,function(result) {
-			console.log(result);
+	CallServer : function(host, obj, callback){
+		$.get( "http://localhost:8000/" + host, obj ,function(result) {
+			callback(JSON.parse(result));
 		});
 	}
 };
@@ -402,36 +403,47 @@ var BackGroundImg = function(obj, time, fadetime, url, length){
 	this.Length = length;
 	this.Url = url;
 	this.BG = [];
-	this.BG[0] = this.Obj.children[0];
-	this.BG[1] = this.Obj.children[1];
+	
 	this.Time = time;
 	this.FadeTime = fadetime;
 	this.Tween = null;
-	this.TweenBG = null;
+	this.TweenBG = [];
 	this.Index = 0;
-	this.Front = 0;
+	this.IndexPrev = -1;
 	this.BackZindex = _BACKINDEX;
 	this.FrontZindex = _FRONTINDEX;
-	this.Init();
+
+	this.InitBG();
 }
+
+BackGroundImg.prototype.InitBG = function() {
+	for (var i = 0; i < this.Length; i++) {
+		this.BG[i] = CreateDiv(this.Obj, "newsbg");	
+		$(this.BG[i]).css("background-image", this.GetImgUrl(i));
+		if (i != this.Index){
+			$(this.BG[i]).css("opacity", 0);
+			$(this.BG[i]).css("z-index", this.FrontZindex);
+		} else {
+			$(this.BG[i]).css("z-index", this.BackZindex);
+		}
+	}
+}
+
 
 BackGroundImg.prototype.SetZindex = function(backzindex, frontzindex){
 	this.BackZindex = backzindex;
 	this.FrontZindex = frontzindex;
 }
 
-BackGroundImg.prototype.Init = function(){
-	$(this.BG[this.Front]).css("background-image", this.GetImgUrl());
-}
-
-BackGroundImg.prototype.GetImgUrl = function(){
-	return "url('" + this.Url + (this.Index + 1) + ".jpg')";
+BackGroundImg.prototype.GetImgUrl = function(position){
+	return "url('" + this.Url + (position + 1) + ".jpg')";
 }
 
 BackGroundImg.prototype.Loop = function(){
-	this.Tween = TweenLite.to(this.Obj, 0,{
-		delay : this.Time,
+	if (this.Tween != null) this.Tween.kill();
+	this.Tween = TweenLite.to(this.Obj, this.Time,{
 		onComplete : function(){
+			this.IndexPrev = this.Index;
 			this.Index++;
 			this.Index = this.Index % this.Length;
 			this.Animate();
@@ -446,32 +458,45 @@ BackGroundImg.prototype.EndLoop = function(){
 }
 
 BackGroundImg.prototype.Animate = function(){
-	$(this.BG[1 - this.Front]).css("background-image", this.GetImgUrl());
+	for (var i = 0; i < this.Length; i++) {
+		if (i == this.Index){
+			$(this.BG[i]).css("opacity", 0);
+			$(this.BG[i]).css("z-index", this.FrontZindex);	
+		} else if (i == this.IndexPrev){
+			$(this.BG[i]).css("opacity", 1);
+			$(this.BG[i]).css("z-index", this.BackZindex);	
+		} else {
+			$(this.BG[i]).css("opacity", 0);
+			$(this.BG[i]).css("z-index", this.BackZindex);	
+		}
+	};
+	
 	this.FadeIn();
-	this.FadeOut();
-	this.Front = 1 - this.Front;
 }
 
 BackGroundImg.prototype.FadeIn = function(){
-	$(this.BG[1 - this.Front]).css("opacity", 1);
-	$(this.BG[1 - this.Front]).css("z-index", this.BackZindex);
-}
-
-BackGroundImg.prototype.FadeOut = function(){
-	$(this.BG[this.Front]).css("opacity", 1);
-	$(this.BG[this.Front]).css("z-index", this.FrontZindex);
-	this.TweenBG = TweenLite.to(this.BG[this.Front], this.FadeTime, {
-		opacity: 0,
-		ease: "easeInOutSine"
+	this.TweenBG[this.Index] = TweenLite.to(this.BG[this.Index], this.FadeTime, {
+		opacity: 1,
+		ease: "easeInOutSine",
+		onComplete : function() {
+			$(this.BG[this.IndexPrev]).css("opacity", 0);		
+		},
+		onCompleteScope: this
 	});
 }
 
 BackGroundImg.prototype.Pause = function(){
 	if (this.Tween != null) this.Tween.pause();
-	if (this.TweenBG != null) this.TweenBG.pause();
+	for (var i = 0; i < this.Length; i++) {
+		if (this.TweenBG[i] != null) 
+			this.TweenBG[i].pause();	
+	}
 }
 
 BackGroundImg.prototype.Resume = function(){
 	if (this.Tween != null) this.Tween.resume();
-	if (this.TweenBG != null) this.TweenBG.resume();
+	for (var i = 0; i < this.Length; i++) {
+		if (this.TweenBG[i] != null) 
+			this.TweenBG[i].resume();	
+	}
 }

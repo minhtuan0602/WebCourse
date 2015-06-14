@@ -1,6 +1,6 @@
 var _BtnTime = 0.3;
 var _TextTime = 0.3;
-var _BtnWidthPercent = 20;
+var _BtnWidthPercent = 34;
 var _GroupPrefix = "SG";
 var _ExpandTime = 0.5;
 var _BarTime = 0.5;
@@ -10,6 +10,7 @@ var _Research = {
 	_ListGroupLength : 0,
 	_GroupSelected : 0,
 	_TitleHeight : 0,
+	_Bn : 3,
 
 	Init : function(){
 		var GroupHead = $('#researchgroup .titlegroup');
@@ -31,7 +32,7 @@ var _Research = {
 
 	onWindowResize : function(){
 		ResearchBar.LeftHeight = $('#leftresearch').outerHeight(true);
-		ResearchBar.OuterHeight = this._TitleHeight / 2 + 2 * $('#researchgroup').outerHeight(true);
+		ResearchBar.OuterHeight = this._TitleHeight / 2 + $('#researchgroup').outerHeight(true);
 
 		var PWidth = $('#researchgroup').width();
 		var Width = Math.floor(_BtnWidthPercent / 100 * PWidth);
@@ -277,14 +278,14 @@ var ResearchBar = {
 		this.TopCircle = CreateDiv(LeftDiv, "bigcircle");
 		this.BotCircle = CreateDiv(LeftDiv, "bigcircle");
 
-		$(this.BotCircle).css("top", -5);
-		$(this.TopCircle).css("top", -5);
+		$(this.BotCircle).css("top", -7);
+		$(this.TopCircle).css("top", -7);
 	},
 
 	Resize : function(){
 		TweenLite.killTweensOf(this.Bar);
 		TweenLite.killTweensOf(this.BotCircle);
-		$(this.BotCircle).css("top", this.GetHeightBar() - 5);
+		$(this.BotCircle).css("top", this.GetHeightBar() - 7);
 		$(this.Bar).css("height", this.GetHeightBar());
 	},
 
@@ -292,11 +293,11 @@ var ResearchBar = {
 		TweenLite.killTweensOf(this.Bar);
 		TweenLite.killTweensOf(this.BotCircle);
 		$(this.Bar).css("height", 0);
-		$(this.BotCircle).css("top", -5);
+		$(this.BotCircle).css("top", -7);
 		this.NextSection = 0;
 
 		TweenLite.to(this.BotCircle, _BarTime, {
-			top : this.GetHeightBar() - 5,
+			top : this.GetHeightBar() - 7,
 			ease : "easeInOutSine"});	
 		
 		TweenLite.to(this.Bar, _BarTime, {
@@ -337,7 +338,7 @@ Change : function(){
 	TweenLite.killTweensOf(this.BotCircle);
 
 	TweenLite.to(this.BotCircle, _BarTime, {
-		top : this.GetHeightBar() - 5,
+		top : this.GetHeightBar() - 7,
 		ease : "easeInOutSine"
 	});
 
@@ -349,9 +350,9 @@ Change : function(){
 
 GetHeightBar : function(){
 	if (this.ContentHeight + this.OuterHeight < this.LeftHeight)
-		return this.ContentHeight + this.OuterHeight + 10;
+		return this.ContentHeight + this.OuterHeight + 8;
 	else 
-		return this.LeftHeight + 10;
+		return this.LeftHeight + 8;
 }
 }
 
@@ -363,22 +364,24 @@ ResearchDot.prototype.Reposition = function(Top, Left, Type){
 	TweenLite.killTweensOf(this.Dot);
 	var option = {};
 	if (Type == 0){
-		option = {top: Top, width: 7,height: 7,left: Left - 4, ease: "easeInOutSine"};
+		option = {top: Top - 6, width: 9,height: 9,left: Left - 6, ease: "easeInOutSine"};
 	} else if (Type == 1){
-		option = {top: Top, width: 5,height: 5,left: Left - 3, ease: "easeInOutSine"};
+		option = {top: Top - 4, width: 5,height: 5,left: Left - 4, ease: "easeInOutSine"};
 	} else {
-		option = {top: Top, left: Left - 3};
+		option = {top: Top - 4, left: Left - 4};
 	}
 	TweenLite.to(this.Dot, _ExpandTime, option);	
 }
 
 ResearchDot.prototype.RepositionIm = function(Top, Left, isSelected){
 	TweenLite.killTweensOf(this.Dot);
-	$(this.Dot).css("top" , Top);
+	
 	if (isSelected){
-		$(this.Dot).css("left" , Left - 4);	
+		$(this.Dot).css("top" , Top - 6);
+		$(this.Dot).css("left" , Left - 6);	
 	} else {
-		$(this.Dot).css("left" , Left - 3);	
+		$(this.Dot).css("top" , Top - 4);
+		$(this.Dot).css("left" , Left - 4);	
 	}
 	
 }

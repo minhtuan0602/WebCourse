@@ -28,6 +28,11 @@ function MouseScroll(event) {
 		delta = -40 * event.detail;
 	}
 	//console.log(delta);
+	if (_About._BoxTextIn.inside){
+		_About.onScrollInText(delta);
+		return;
+	}
+
 	if (_State == _NORMALSTATE){
 		if (!_Scrolling && _Position == 3 && delta < 0){
 			_State = _FOOTERSTATE;
@@ -85,6 +90,7 @@ function ScrollNormal (delta){
 		TweenLite.to(window, 1, {
 			scrollTo:{ y:_WinInsideHeight * position }, 
 			ease: "easeInOutCubic",
+			immediateRender: true,
 			onComplete : function(){
 				_Scrolling = false;
 				_Position = position;
@@ -125,7 +131,7 @@ function ScrollToPosition(event){
 var _Footer = {
 	_Obj : null,
 	_isExpanded : false,
-	_ExpandTime : 1,
+	_ExpandTime : 0.5,
 
 	Init : function(){
 		this._Obj = $("#footer");
